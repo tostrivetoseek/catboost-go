@@ -1,18 +1,18 @@
 # CatBoost Wrapper for Go
-Simple wrapper of [CatBoost C library](https://tech.yandex.com/catboost/doc/dg/concepts/c-plus-plus-api_dynamic-c-pluplus-wrapper-docpage/) for prediction
+Simple wrapper of [CatBoost C library](https://tech.yandex.com/catboost/doc/dg/concepts/c-plus-plus-api_dynamic-c-pluplus-wrapper-docpage/) based on https://github.com/ma3axaka/catboost-go
 
 ## Installation
-CatBoost library is assumed to be installed and all its includes and library files are assumed to be found in corresponding paths. One way to do it is using environment variables:
+CatBoost library is assumed to be installed (https://catboost.ai/docs/concepts/c-plus-plus-api_dynamic-c-pluplus-wrapper.html):
 ```sh
 git clone https://github.com/catboost/catboost.git
-cd catboost/catboost/libs/model_interface && ../../../ya make -r .
-export CATBOOST_DIR=$(pwd)
+cd catboost
+ya make -r catboost/libs/model_interface
+export CATBOOST_DIR=$(pwd)/catboost/libs/model_interface
 export C_INCLUDE_PATH=$CATBOOST_DIR:$C_INCLUDE_PATH
 export LIBRARY_PATH=$CATBOOST_DIR:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$CATBOOST_DIR:$LD_LIBRARY_PATH
 ```
-The other way is to put compiled library files and include files to default search diretories (`/usr/local/lib`, `/usr/local/include`).
-If everything above is properly configured then a simple `go get` command will do the trick:
+The other way is to put compiled library files and include files to `.` or default search diretories (`/usr/local/lib`, `/usr/local/include`).
 ```
-go get -u github.com/ma3axaka/catboost-go
+go get -u github.com/tostrivetoseek/catboost-go
 ```

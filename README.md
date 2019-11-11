@@ -12,7 +12,7 @@ export C_INCLUDE_PATH=$CATBOOST_DIR:$C_INCLUDE_PATH
 export LIBRARY_PATH=$CATBOOST_DIR:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$CATBOOST_DIR:$LD_LIBRARY_PATH
 ```
-The other way is to put compiled library files and include files to `.` or default search diretories (`/usr/local/lib`, `/usr/local/include`).
+The other way is to put compiled library files and include files to `.` or `/usr/local/lib` + `/usr/local/include`.
 ```
 go get -u github.com/tostrivetoseek/catboost-go
 ```

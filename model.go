@@ -131,11 +131,9 @@ func (model *Model) CalcModelPrediction(floats [][]float32, cats [][]string) ([]
 
 	results := make([]float64, nSamples)
 
-	var floatsBuf []float32 // to prevent moving by GC
-	var floatsCUPtr unsafe.Pointer
+	floatsBuf := make([]float32, nSamples*floatLength) // to prevent moving by GC
+	floatsC := make([]*C.float, nSamples)
 	if floatLength > 0 {
-		floatsBuf = make([]float32, nSamples*floatLength)
-		floatsC := make([]*C.float, nSamples)
 		for i, x := range floats {
 			if i >= nSamples {
 				break
@@ -145,9 +143,8 @@ func (model *Model) CalcModelPrediction(floats [][]float32, cats [][]string) ([]
 			copy(data, x)
 			floatsC[i] = (*C.float)(&data[0])
 		}
-
-		floatsCUPtr = unsafe.Pointer(&floatsC[0])
 	}
+	floatsCUPtr := unsafe.Pointer(&floatsC[0])
 
 	catsC := make([]**C.char, nSamples)
 	for i, x := range cats {
